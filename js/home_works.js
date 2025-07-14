@@ -43,3 +43,34 @@ const count = () => {
 //         count
 //     }
 // }
+
+//ДЗ 2
+
+const secondsBlock = document.querySelector('#seconds')
+const startBtn = document.querySelector('#start')
+const stopBtn = document.querySelector('#stop')
+const resetBtn = document.querySelector('#reset')
+
+let seconds = 0
+let interval = null
+
+startBtn.onclick = () => {
+    if ( interval !== null ) return
+    interval = setInterval ( () => {
+        seconds++
+        secondsBlock.innerText = seconds
+    }, 1000)
+}
+
+stopBtn.onclick = () => {
+    clearInterval(interval)
+    interval = null
+}
+
+resetBtn.onclick = () => {
+    clearInterval(interval)
+    seconds=0
+    secondsBlock.innerText=seconds
+    interval=null
+}
+
