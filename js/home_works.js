@@ -19,21 +19,68 @@ gmailButton.onclick =() => {
 
 
 //animation block
-let number = 0;
-const block = document.querySelector('.child_block');
+// let number = 0;
+// const block = document.querySelector('.child_block');
+// const parentBlock = document.querySelector('.parent_block')
 
-const count = () => {
-    number++;
-    block.style.left = number + "px";
+const childBlock = document.querySelector('.child_block');
+const parentBlock = document.querySelector('.parent_block');
 
-    if (number < 447) {
-        requestAnimationFrame(count); 
+let positionX = 0;
+let positionY = 0;
+let direction = 'right';
+
+const offsetWidth = parentBlock.clientWidth - childBlock.clientWidth;
+const offsetHeight = parentBlock.clientHeight - childBlock.clientHeight;
+
+const moveBlock = () => {
+    if (direction === 'right') {
+        if (positionX < offsetWidth) {
+            positionX++;
+        } else {
+            direction = 'down';
+        }
+    } else if (direction === 'down') {
+        if (positionY < offsetHeight) {
+            positionY++;
+        } else {
+            direction = 'left';
+        }
+    } else if (direction === 'left') {
+        if (positionX > 0) {
+            positionX--;
+        } else {
+            direction = 'up';
+        }
+    } else if (direction === 'up') {
+        if (positionY > 0) {
+            positionY--;
+        } else {
+            direction = 'right';
+        }
     }
+
+    childBlock.style.left = `${positionX}px`;
+    childBlock.style.top = `${positionY}px`;
+
+    requestAnimationFrame(moveBlock);
 };
 
- window.onload = () => {
-      count();
- }
+moveBlock();
+
+// const count = () => {
+//     number++;
+//     block.style.left = number + "px";
+
+//     if (number < 447) {
+//         requestAnimationFrame(count); 
+//     }
+// };
+
+//  window.onload = () => {
+//       count();
+//  }
+
 
 // let number=0
 // const count = () => {
